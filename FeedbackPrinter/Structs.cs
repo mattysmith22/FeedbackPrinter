@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace FeedbackPrinter
 {
-    public struct FeedBackData
+    public struct FeedbackData
     {
         public string studentName; //The name of the student
         public string topicName; //The name of the topic
@@ -23,11 +23,22 @@ namespace FeedbackPrinter
 
     }
 
-    public struct Fonts
+    public struct FeedbackDocumentFonts
     {
-        public Font title; //The font used for titles (underlined in the source document)
+        public FeedbackDocumentFonts()
+        {
+            
+            data = new Font("Calibri", 12, FontStyle.Regular);
+            dataDescriptor = new Font("Calibri", 12, FontStyle.Regular);
+            topics = new Font("Calibri", 12, FontStyle.Regular);
+            feedback = new Font("Calibri", 12, FontStyle.Regular);
+            teacher = new Font("Calibri", 12, FontStyle.Underline | FontStyle.Bold);
+        }
+
+        public Font title = new Font("Calibri", 12, FontStyle.Underline);; //The font used for titles (underlined in the source document)
         public Font data; //The font used for the inputted fata in the feedback
-        public Font dataDescriptor; //The font that you would like to use for the names of each piece of data, for example "Name: ", "Target Grade: "
+        public Font dataDescriptor; //The font that you would like to use for the names of each piece of data, for example "Name: ", "Target Grade: 
+        public Font topics
         public Font feedback; //The font that is used for the feedback inside the boxes
         public Font teacher; //The font used for the teacher (underlined and bold in the source document)
     }
