@@ -8,12 +8,12 @@ using System.Drawing.Printing;
 
 namespace FeedbackPrinter
 {
-    public class FeedbackPrinter : PrintDocument
+    public class FeedbackPrinterDocument : PrintDocument
     {
         private FeedbackData data;
         public FeedbackDocumentFonts fonts;
 
-        public FeedbackPrinter(FeedbackData data) : base()
+        public FeedbackPrinterDocument(FeedbackData data) : base()
         {
             generateFonts();
             this.data = data;
