@@ -7,27 +7,28 @@ using System.Drawing;
 
 namespace FeedbackPrinter
 {
-    struct FeedBackData
+    public struct FeedBackData
     {
         public string studentName; //The name of the student
-        public string topicName;
-        public DateTime date;
-        public string teacherName;
-        public string topicNote;
-        public string targetGrade;
-        public string acheivedGrade;
-        public string effortGrade;
-        public string[] topicsCovered;
-        public string[] feedbackWWW;
-        public string[] feedbackTIF;
+        public string topicName; //The name of the topic
+        public DateTime date; //The date for the feedback
+        public string teacherName; //The name of the teacher
+        public string topicNote; //The small amount of text that comes after the teacher
+        public string targetGrade; //The target grade of the student
+        public string acheivedGrade; //The acheived grade of the student
+        public string effortGrade; //The effort grade of the student
+        public string[] topicsCovered; //The topics covered in the KMP - it is the bullet points below
+        public string[] feedbackWWWs; //The WWWs that need to go in the topmost box
+        public string[] feedbackTIFs; //The TIFs that need to go in the middle box
 
     }
 
-    struct Fonts
+    public struct Fonts
     {
-        public Font titles;
-        public Font normal;
-        public Font title;
-        public Font feedback;
+        public Font title; //The font used for titles (underlined in the source document)
+        public Font data; //The font used for the inputted fata in the feedback
+        public Font dataDescriptor; //The font that you would like to use for the names of each piece of data, for example "Name: ", "Target Grade: "
+        public Font feedback; //The font that is used for the feedback inside the boxes
+        public Font teacher; //The font used for the teacher (underlined and bold in the source document)
     }
 }
