@@ -18,8 +18,8 @@ namespace FeedbackPrinter
         public string acheivedGrade; //The acheived grade of the student
         public string effortGrade; //The effort grade of the student
         public string[] topicsCovered; //The topics covered in the KMP - it is the bullet points below
-        public string[] feedbackWWWs; //The WWWs that need to go in the topmost box
-        public string[] feedbackTIFs; //The TIFs that need to go in the middle box
+        public string feedbackWWWs; //The WWWs that need to go in the topmost box
+        public string feedbackTIFs; //The TIFs that need to go in the middle box
 
     }
 
@@ -30,6 +30,5 @@ namespace FeedbackPrinter
         public Font dataDescriptor; //The font that you would like to use for the names of each piece of data, for example "Name: ", "Target Grade: 
         public Font topics; //The font that is used for the topics covered section.
         public Font feedback; //The font that is used for the feedback inside the boxes
-        public Font teacher; //The font used for the teacher (underlined and bold in the source document)
     }
 }

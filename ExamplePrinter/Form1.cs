@@ -20,7 +20,17 @@ namespace ExamplePrinter
             InitializeComponent();
 
             data = new FeedbackData();
-            data.acheivedGrade = "..."; //populate the struct
+            data.acheivedGrade = "A*"; //populate the struct
+            data.date = DateTime.Now;
+            data.effortGrade = "1";
+            data.feedbackTIFs = "TIFLorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut hendrerit enim. Mauris facilisis vitae lacus in tempor. Cras non elit nec purus tincidunt imperdiet et a justo. " + Environment.NewLine + " Fusce tellus neque, vehicula et efficitur ut, ullamcorper ac eros. Morbi congue consectetur luctus. Nullam vel erat commodo, venenatis tellus vitae, tincidunt metus. Aenean imperdiet facilisis ante non venenatis. Pellentesque vel auctor sem.";
+            data.feedbackWWWs = "WWWLorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut hendrerit enim. Mauris facilisis vitae lacus in tempor. Cras non elit nec purus tincidunt imperdiet et a justo. " + Environment.NewLine + " Fusce tellus neque, vehicula et efficitur ut, ullamcorper ac eros. Morbi congue consectetur luctus. Nullam vel erat commodo, venenatis tellus vitae, tincidunt metus. Aenean imperdiet facilisis ante non venenatis. Pellentesque vel auctor sem.";
+            data.studentName = "John Smith";
+            data.targetGrade = "B";
+            data.teacherName = "Mr Paffley";
+            data.topicName = "Binary addition";
+            data.topicNote = "Test 3 of 5";
+            data.topicsCovered = new string[] { "Binary addition of signed integers", "Binary addition of unsigned integers", "Converting between binary and denary" };
         }
 
         private void buttonPrint_Click(object sender, EventArgs e)
@@ -30,6 +40,8 @@ namespace ExamplePrinter
                 FeedbackPrinterDocument print = new FeedbackPrinterDocument(data);
                 print.PrinterSettings = printDialog.PrinterSettings;
                 print.Print();
+
+                this.Close();
             }
         }
     }
