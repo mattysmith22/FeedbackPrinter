@@ -31,4 +31,14 @@ namespace FeedbackPrinter
         public Font topics; //The font that is used for the topics covered section.
         public Font feedback; //The font that is used for the feedback inside the boxes
     }
+
+    public struct FeedbackDocumentConfig
+    {
+        public int padding;
+        public int tablePadding;
+        public int tableWidth;
+        public string bulletString;
+        public int minimumMRIHeight;
+        public Brush brush;
+    }
 }
