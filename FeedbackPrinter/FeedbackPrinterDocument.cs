@@ -64,15 +64,15 @@ namespace FeedbackPrinter
             string textToDraw;
             SizeF bulletSize = e.Graphics.MeasureString(config.bulletString, fonts.topics); //The size of the bullet point being used, used to determine spacings,
 
-            #region Printing title "Faculty of Business and Computing"
+            #region Printing the faculty name
 
-            textToDraw = "Faculty of Business and Computing";
+            textToDraw = data.facultyName;
 
-            measuredSize = e.Graphics.MeasureString(textToDraw, fonts.title);
+            measuredSize = e.Graphics.MeasureString(textToDraw, fonts.title, printWidth);
 
             cursor.X = (DefaultPageSettings.PaperSize.Width - measuredSize.Width) / 2;
 
-            e.Graphics.DrawString(textToDraw, fonts.title, config.brush, cursor);
+            e.Graphics.DrawString(textToDraw, fonts.title, config.brush, new RectangleF(cursor, measuredSize));
 
             cursor.Y += measuredSize.Height + config.padding;
             cursor.X = leftMargin;

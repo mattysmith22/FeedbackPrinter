@@ -20,6 +20,7 @@ namespace FeedbackPrinter
         public string[] topicsCovered; //The topics covered in the KMP - it is the bullet points below
         public string feedbackWWWs; //The WWWs that need to go in the topmost box
         public string feedbackTIFs; //The TIFs that need to go in the middle box
+        public string facultyName; //The name of the faculty to be put at the top of the form
 
     }
 

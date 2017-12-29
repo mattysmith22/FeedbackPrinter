@@ -31,6 +31,7 @@ namespace ExamplePrinter
             data.topicName = "Binary addition";
             data.topicNote = "Test 3 of 5";
             data.topicsCovered = new string[] { "Binary addition of signed integers", "Binary addition of unsigned integers", "Converting between binary and denary" };
+            data.facultyName = "Faculty of Business and Computing";
         }
 
         private void buttonPrint_Click(object sender, EventArgs e)
