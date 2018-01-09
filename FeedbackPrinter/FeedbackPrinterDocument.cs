@@ -36,6 +36,7 @@ namespace FeedbackPrinter
             config.brush = Brushes.Black;
             config.bulletString = "\u2022";
             config.minimumMRIHeight = 50;
+            config.maximumMRIHeight = 200;
             config.padding = 10;
             config.tablePadding = 5;
             config.tableWidth = 1;
@@ -225,10 +226,12 @@ namespace FeedbackPrinter
 
             #region Printing the MRI Box
 
+            measuredSize = new SizeF(printWidth, Math.Min(DefaultPageSettings.PaperSize.Height - DefaultPageSettings.Margins.Bottom - cursor.Y, config.maximumMRIHeight));
+
             if(DefaultPageSettings.PaperSize.Height - DefaultPageSettings.Margins.Bottom - cursor.Y > config.minimumMRIHeight)
             {
                 e.Graphics.DrawString("My Response Is (MRI):", fonts.dataDescriptor, config.brush, PointF.Add(cursor, new Size(config.tablePadding, config.tablePadding)));
-                e.Graphics.DrawRectangle(new Pen(config.brush, config.tableWidth), new Rectangle(Point.Round(cursor), new Size(printWidth, (int)(DefaultPageSettings.PaperSize.Height - DefaultPageSettings.Margins.Bottom - cursor.Y))));
+                e.Graphics.DrawRectangle(new Pen(config.brush, config.tableWidth), new Rectangle(Point.Round(cursor), Size.Round(measuredSize)));
             }
 
             #endregion

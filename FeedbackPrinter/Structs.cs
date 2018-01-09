@@ -40,6 +40,7 @@ namespace FeedbackPrinter
         public int tableWidth;
         public string bulletString;
         public int minimumMRIHeight;
+        public int maximumMRIHeight;
         public Brush brush;
     }
 }
