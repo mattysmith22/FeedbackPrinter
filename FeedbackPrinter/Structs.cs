@@ -7,6 +7,7 @@ using System.Drawing;
 
 namespace FeedbackPrinter
 {
+    [Serializable]
     public struct FeedbackData
     {
         public string studentName; //The name of the student
@@ -24,6 +25,7 @@ namespace FeedbackPrinter
 
     }
 
+    [Serializable]
     public struct FeedbackDocumentFonts
     {
         public Font title; //The font used for titles (underlined in the source document)
@@ -33,6 +35,7 @@ namespace FeedbackPrinter
         public Font feedback; //The font that is used for the feedback inside the boxes
     }
 
+    [Serializable]
     public struct FeedbackDocumentConfig
     {
         public int padding;
