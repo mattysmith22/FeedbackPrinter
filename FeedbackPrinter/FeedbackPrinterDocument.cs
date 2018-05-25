@@ -10,12 +10,20 @@ namespace FeedbackPrinter
 {
     public class FeedbackPrinterDocument : PrintDocument
     {
-        private FeedbackData data;
+        private FeedbackData[] data;
 
         public FeedbackDocumentFonts fonts;
         public FeedbackDocumentConfig config;
 
+        private int count;
+
         public FeedbackPrinterDocument(FeedbackData data) : base()
+        {
+            populateStructs();
+            this.data = new FeedbackData[] { data };
+        }
+
+        public FeedbackPrinterDocument(FeedbackData[] data) : base()
         {
             populateStructs();
             this.data = data;
@@ -45,11 +53,13 @@ namespace FeedbackPrinter
         protected override void OnBeginPrint(PrintEventArgs e) //Runs when the page starts printing
         {
             base.OnBeginPrint(e);
+            count = 0;
         }
 
         protected override void OnPrintPage(PrintPageEventArgs e) //Runs when the page starts printing
         {
             base.OnPrintPage(e);
+            FeedbackData currentData = data[count];
 
             int printHeight = DefaultPageSettings.PaperSize.Height - DefaultPageSettings.Margins.Top - DefaultPageSettings.Margins.Bottom;
             int printWidth = DefaultPageSettings.PaperSize.Width - DefaultPageSettings.Margins.Left - DefaultPageSettings.Margins.Right;
@@ -67,7 +77,7 @@ namespace FeedbackPrinter
 
             #region Printing the faculty name
 
-            textToDraw = data.facultyName;
+            textToDraw = currentData.facultyName;
 
             measuredSize = e.Graphics.MeasureString(textToDraw, fonts.title, printWidth);
 
@@ -82,7 +92,7 @@ namespace FeedbackPrinter
 
             #region Printing the topic name
 
-            textToDraw = "Topic: " + data.topicName;
+            textToDraw = "Topic: " + currentData.topicName;
 
             measuredSize = e.Graphics.MeasureString(textToDraw, fonts.title, printWidth);
 
@@ -97,7 +107,7 @@ namespace FeedbackPrinter
 
             #region Printing the feedback details
 
-            textToDraw = data.teacherName + " - " + data.topicNote + " / " + data.date.ToString(@"dd\/MM\/yyyy");
+            textToDraw = currentData.teacherName + " - " + currentData.topicNote + " / " + currentData.date.ToString(@"dd\/MM\/yyyy");
 
             measuredSize = e.Graphics.MeasureString(textToDraw, fonts.title, printWidth);
 
@@ -119,9 +129,9 @@ namespace FeedbackPrinter
             cursor.X += totalSize.Width;
             totalSize.Height = measuredSize.Height;
 
-            totalSize = e.Graphics.MeasureString(data.studentName, fonts.data);
+            totalSize = e.Graphics.MeasureString(currentData.studentName, fonts.data);
 
-            e.Graphics.DrawString(data.studentName, fonts.data, config.brush, cursor);
+            e.Graphics.DrawString(currentData.studentName, fonts.data, config.brush, cursor);
 
             totalSize.Height = Math.Max(totalSize.Height, measuredSize.Height);
 
@@ -136,7 +146,7 @@ namespace FeedbackPrinter
             e.Graphics.DrawString("Target grade: ", fonts.dataDescriptor, config.brush, cursor);
             cursor.X += measuredSize.Width;
 
-            e.Graphics.DrawString(data.targetGrade, fonts.dataDescriptor, config.brush, cursor);
+            e.Graphics.DrawString(currentData.targetGrade, fonts.dataDescriptor, config.brush, cursor);
             cursor.X = DefaultPageSettings.PaperSize.Width / 2;
 
             measuredSize = e.Graphics.MeasureString("Acheived grade: ", fonts.dataDescriptor);
@@ -144,7 +154,7 @@ namespace FeedbackPrinter
 
             cursor.X += measuredSize.Width;
 
-            e.Graphics.DrawString(data.acheivedGrade, fonts.data, config.brush, cursor);
+            e.Graphics.DrawString(currentData.acheivedGrade, fonts.data, config.brush, cursor);
 
             cursor.X = leftMargin;
             cursor.Y += Math.Max(fonts.data.Height, fonts.dataDescriptor.Height) + config.padding;
@@ -159,7 +169,7 @@ namespace FeedbackPrinter
 
             cursor.X += measuredSize.Width;
 
-            e.Graphics.DrawString(data.effortGrade, fonts.data, config.brush, cursor);
+            e.Graphics.DrawString(currentData.effortGrade, fonts.data, config.brush, cursor);
 
             cursor.X = leftMargin;
             cursor.Y += Math.Max(fonts.data.Height, fonts.dataDescriptor.Height) + config.padding;
@@ -172,7 +182,7 @@ namespace FeedbackPrinter
 
             cursor.Y += fonts.dataDescriptor.Height + config.padding;
 
-            foreach (string topic in data.topicsCovered)
+            foreach (string topic in currentData.topicsCovered)
             {
                 e.Graphics.DrawString(config.bulletString, fonts.topics, config.brush, cursor);
                 cursor.X += bulletSize.Width;
@@ -194,8 +204,8 @@ namespace FeedbackPrinter
 
             e.Graphics.DrawString("Feedback and strengths (WWW):", fonts.dataDescriptor, config.brush, cursor);
             cursor.Y += fonts.dataDescriptor.Height;
-            measuredSize = e.Graphics.MeasureString(data.feedbackWWWs, fonts.feedback, printWidth - 2 * config.tablePadding);
-            e.Graphics.DrawString(data.feedbackWWWs, fonts.feedback, config.brush, new RectangleF(cursor, measuredSize));
+            measuredSize = e.Graphics.MeasureString(currentData.feedbackWWWs, fonts.feedback, printWidth - 2 * config.tablePadding);
+            e.Graphics.DrawString(currentData.feedbackWWWs, fonts.feedback, config.brush, new RectangleF(cursor, measuredSize));
             cursor.Y += measuredSize.Height + config.tablePadding;
 
             e.Graphics.DrawRectangle(new Pen(config.brush, config.tableWidth), new Rectangle(Point.Round(cornerRectangle), new Size(printWidth, (int)(cursor.Y - cornerRectangle.Y))));
@@ -213,8 +223,8 @@ namespace FeedbackPrinter
 
             e.Graphics.DrawString("To improve further (TIF):", fonts.dataDescriptor, config.brush, cursor);
             cursor.Y += fonts.dataDescriptor.Height;
-            measuredSize = e.Graphics.MeasureString(data.feedbackTIFs, fonts.feedback, printWidth - 2 * config.tablePadding);
-            e.Graphics.DrawString(data.feedbackTIFs, fonts.feedback, config.brush, new RectangleF(cursor, measuredSize));
+            measuredSize = e.Graphics.MeasureString(currentData.feedbackTIFs, fonts.feedback, printWidth - 2 * config.tablePadding);
+            e.Graphics.DrawString(currentData.feedbackTIFs, fonts.feedback, config.brush, new RectangleF(cursor, measuredSize));
             cursor.Y += measuredSize.Height + config.tablePadding;
 
             e.Graphics.DrawRectangle(new Pen(config.brush, config.tableWidth), new Rectangle(Point.Round(cornerRectangle), new Size(printWidth, (int)(cursor.Y - cornerRectangle.Y))));
@@ -228,13 +238,23 @@ namespace FeedbackPrinter
 
             measuredSize = new SizeF(printWidth, Math.Min(DefaultPageSettings.PaperSize.Height - DefaultPageSettings.Margins.Bottom - cursor.Y, config.maximumMRIHeight));
 
-            if(DefaultPageSettings.PaperSize.Height - DefaultPageSettings.Margins.Bottom - cursor.Y > config.minimumMRIHeight)
+            if (DefaultPageSettings.PaperSize.Height - DefaultPageSettings.Margins.Bottom - cursor.Y > config.minimumMRIHeight)
             {
                 e.Graphics.DrawString("My Response Is (MRI):", fonts.dataDescriptor, config.brush, PointF.Add(cursor, new Size(config.tablePadding, config.tablePadding)));
                 e.Graphics.DrawRectangle(new Pen(config.brush, config.tableWidth), new Rectangle(Point.Round(cursor), Size.Round(measuredSize)));
             }
 
             #endregion
+
+            if (count < (data.Length - 1) )
+            {
+                e.HasMorePages = true;
+            }
+            else
+            {
+                e.HasMorePages = false;
+            }
+            count++;
         }
     }
 }

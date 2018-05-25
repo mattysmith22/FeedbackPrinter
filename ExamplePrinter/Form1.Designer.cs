@@ -31,6 +31,7 @@
             this.labelNote = new System.Windows.Forms.Label();
             this.buttonPrint = new System.Windows.Forms.Button();
             this.printDialog = new System.Windows.Forms.PrintDialog();
+            this.checkBoxMultiple = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // labelNote
@@ -57,11 +58,22 @@
             // 
             this.printDialog.UseEXDialog = true;
             // 
+            // checkBoxMultiple
+            // 
+            this.checkBoxMultiple.AutoSize = true;
+            this.checkBoxMultiple.Location = new System.Drawing.Point(13, 73);
+            this.checkBoxMultiple.Name = "checkBoxMultiple";
+            this.checkBoxMultiple.Size = new System.Drawing.Size(95, 17);
+            this.checkBoxMultiple.TabIndex = 2;
+            this.checkBoxMultiple.Text = "Multiple Pages";
+            this.checkBoxMultiple.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(204, 75);
+            this.ClientSize = new System.Drawing.Size(204, 117);
+            this.Controls.Add(this.checkBoxMultiple);
             this.Controls.Add(this.buttonPrint);
             this.Controls.Add(this.labelNote);
             this.Name = "Form1";
@@ -76,6 +88,7 @@
         private System.Windows.Forms.Label labelNote;
         private System.Windows.Forms.Button buttonPrint;
         private System.Windows.Forms.PrintDialog printDialog;
+        private System.Windows.Forms.CheckBox checkBoxMultiple;
     }
 }
 
